@@ -4,12 +4,6 @@ pipeline {
     options {
         timeout(time: 1, unit: 'SECONDS')
     }
-    docker {
-        image ''
-        label ''
-        args ''  
-    } 
- 
     stages {
         stage ('Build') {
             when {
