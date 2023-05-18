@@ -7,8 +7,6 @@ pipeline {
         stage ('Build') {
             steps { 
                 echo 'building the application...'
-                
-                sh "docker build -t lewis/newimage:latest ${WORKSPACE}"
             }
         }
         stage ('Test') {
