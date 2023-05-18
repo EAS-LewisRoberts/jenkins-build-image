@@ -7,7 +7,6 @@ pipeline {
         stage ('Build') {
             steps { 
                 echo 'building the application...'
-                echo "building version ${NEW=VERSION"
                 
                 sh "docker build -t lewis/newimage:latest ${WORKSPACE}"
             }
