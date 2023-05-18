@@ -19,5 +19,4 @@ pipeline {
                 echo 'depolying the application...'
             }
         }
-    }
 }
