@@ -1,10 +1,26 @@
 pipeline {
- agent any
-  stages {
-   stage ('stage1'){
-   steps{
-    sh 'ls'
-   }
-  }
- }
+    agent any
+ 
+    stages {
+        stage ('Build') {
+            steps{
+                sh 'ls'
+            }
+        }
+        stage ('Recieve') {
+            steps{
+                sh 'ls'
+            }
+        }
+        stage ('Test') {
+            steps{
+                sh 'ls'
+            }
+        }
+        stage ('Deploy') {
+            steps{
+                sh 'ls'
+            }
+        }
+    }
 }
