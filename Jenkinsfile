@@ -1,20 +1,20 @@
-CODE_CHANGES = getGitChanges()
 pipeline {
     agent any
     stages {
         stage ('Build') {
-            steps{
+            steps { 
                 echo 'building the application...'
             }
         }
         stage ('Test') {
-            steps{
+            steps {
                 echo 'testing the application...'
             }
         }
         stage ('deploy') {
-            steps{
+            steps {
                 echo 'depolying the application...'
             }
         }
+    }
 }
