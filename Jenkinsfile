@@ -8,7 +8,7 @@ pipeline {
         image ''
         label ''
         args ''  
-        
+    } 
  
     stages {
         stage ('Build') {
