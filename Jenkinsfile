@@ -1,25 +1,44 @@
+CODE_CHANGES = getGitChanges()
 pipeline {
     agent any
+    options {
+        timeout(time: 1, unit: 'SECONDS')
+    }
+    docker {
+        image ''
+        label ''
+        args ''  
+        
  
     stages {
         stage ('Build') {
+            when {
+                expression {
+                    env.BRANCH_NAME == 'dev' && CODE_CHANGES == true
+                }
+            }
             steps{
-                sh 'ls'
+                echo 'building the application...'
             }
         }
         stage ('Recieve') {
             steps{
-                sh 'ls'
+                echo 'recieving the application...'
             }
         }
         stage ('Test') {
+            when {
+                expression {
+                    env.BRANCH_NAME == 'dev' || BRANCH_NAME == 'master'
+                }
+            }
             steps{
-                sh 'ls'
+                echo 'testing the application...'
             }
         }
         stage ('Deploy') {
             steps{
-                sh 'ls'
+                echo 'deploying the application...'
             }
         }
     }
