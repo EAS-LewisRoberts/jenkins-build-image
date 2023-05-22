@@ -9,7 +9,7 @@ pipeline {
          stage("build") {
           steps {
             echo 'building the application..'
-             sh "ls -a"
+             sh 'mvn install -Dmaven.test.sklip=true'
           }
          }
 
