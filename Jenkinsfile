@@ -7,17 +7,12 @@ pipeline {
     
     stages {
          stage("build") {
-            when {
-               expression {
-                  BRANCH_NAME == 'dev' && CODE_CHANGES == true
-               }
-            }
-         }
           steps {
             echo 'building the application..'
              sh "ls -a"
              dockerimage = docker.build("lewisroberts/backend:latest")
           }
+         }
     
          stage('Clone repository') {
            steps {
@@ -26,14 +21,9 @@ pipeline {
          }
 
          stage("test") {
-            when {
-               expression {
-                  BRANCH_NAME == 'dev' || BRANCH_NAME == 'main'
-                   steps {
-                       echo 'testing the application..'
-                   }
-               }
-            }
+             steps {
+                 echo 'testing the application..'
+             }
          }
          stage("deploy") {
           steps {
