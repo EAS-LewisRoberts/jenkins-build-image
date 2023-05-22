@@ -19,6 +19,11 @@ pipeline{
          }
     
          stage("Build image") {
+             when {
+                 expression {
+                     BRANCH_NAME =='dev' && CODE_CHANGES == true
+                 }
+             }
            steps {
              dockerImage = docker.build("lewisroberts/image1:latest")
            }
@@ -31,16 +36,5 @@ pipeline{
              }
            }
          }
-   }    
-    post {
-        always {
-            //
-        }
-        failure {
-            //
-        }
-        succcess {
-            //
-        }
-    }
+   }   
 }
