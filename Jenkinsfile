@@ -14,6 +14,7 @@ pipeline {
             }
           steps {
             echo 'building the application..'
+             sh "ls -a"
           }
          }
          stage("test") {
