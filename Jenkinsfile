@@ -40,7 +40,7 @@ pipeline {
     
          stage('Push image') {
            steps {
-             echo "pushing with ${SERVER_CREDENTIALS}
+             echo "pushing with ${SERVER_CREDENTIALS}"
              withDockerRegistry([ credentialsId: "dockerhubaccount", url: "https://hub.docker.com/repositories/lewisroberts" ]) {
                       dockerImage.push()
              }
