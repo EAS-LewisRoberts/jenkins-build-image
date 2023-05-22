@@ -9,7 +9,7 @@ pipeline {
          stage("build") {
           steps {
             echo 'building the application..'
-             sh 'mvn install -Dmaven.test.sklip=true'
+             sh 'mvn install -Dmaven.test.skip=true'
           }
          }
 
