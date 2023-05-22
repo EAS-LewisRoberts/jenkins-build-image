@@ -10,7 +10,6 @@ pipeline {
           steps {
             echo 'building the application..'
              sh "ls -a"
-             dockerimage = docker.build("lewisroberts/backend:latest")
           }
          }
     
