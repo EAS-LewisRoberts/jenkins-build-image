@@ -12,12 +12,6 @@ pipeline {
              sh "ls -a"
           }
          }
-    
-         stage('Clone repository') {
-           steps {
-             git credentialsId: 'git', url: 'https://github.com/EAS-LewisRoberts/jenkins-build-image'
-           }
-         }
 
          stage("test") {
              steps {
