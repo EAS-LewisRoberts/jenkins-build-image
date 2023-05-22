@@ -18,7 +18,17 @@ pipeline {
              dockerimage = docker.build("lewisroberts/backend:latest")
           }
          }
+    
+         stage('Clone repository') {
+           steps {
+             git credentialsId: 'git', url: 'https://github.com/EAS-LewisRoberts/jenkins-build-image'
+           }
+         }
+
          stage("test") {
+            when {
+               expression {
+                  BRANCH_NAME == 'dev' || BRANCH_NAME == 'main'
           steps {
             echo 'testing the application..'
           }
