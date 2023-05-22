@@ -3,7 +3,7 @@ pipeline{
   agent any
     
   stages {
-      stage("test") {
+      stage('test') {
           when {
               expression {
                   BRANCH_NAME == 'dev' || BRANCH_NAME == 'master'
@@ -12,13 +12,13 @@ pipeline{
           steps {
               echo 'testing the application...'
       }
-         stage("Clone repository") {
+         stage('Clone repository') {
            steps {
              git credentialsId: 'git', url: 'https://github.com/EAS-LewisRoberts/jenkins-build-image'
            }
          }
     
-         stage("Build image") {
+         stage('Build image') {
              when {
                  expression {
                      BRANCH_NAME =='dev' && CODE_CHANGES == true
@@ -29,7 +29,7 @@ pipeline{
            }
          }
     
-         stage("Push image") {
+         stage('Push image') {
            steps {
              withDockerRegistry([ credentialsId: "dockerhubaccount", url: "https://hub.docker.com/repositories/lewisroberts" ]) {
                       dockerImage.push()
