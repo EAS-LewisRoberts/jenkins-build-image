@@ -11,7 +11,7 @@ pipeline{
 		stage('Build') {
 
 			steps {
-				sh 'docker build -t lewsiroberts/nodeapp:latest .'
+				sh 'docker build -t backend/nodeapp:latest .'
 			}
 		}
 
@@ -25,7 +25,7 @@ pipeline{
 		stage('Push') {
 
 			steps {
-				sh 'docker push lewisroberts/nodeapp:latest'
+				sh 'docker push backend/nodeapp:latest'
 			}
 		}
 	}
