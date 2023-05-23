@@ -1,29 +1,28 @@
 pipeline {
     agent any
-    
+
     stages {
-        stage('Build Image') {
+        stage('Build') {
             steps {
-                script {
-                    def imageName = 'lewisroberts/frontend'
-                    def imageTag = 'latest'
-                    
-                    // Build Docker image
-                    docker.build(imageName + ':' + imageTag)
-                }
+                sh 'docker build -t frontend .'
             }
         }
-        stage('Push to Docker Hub') {
+
+        stage('Tag') {
             steps {
-                withCredentials([usernamePassword(credentialsId: 'lewisroberts', passwordVariable: 'DOCKERHUB_PASSWORD', usernameVariable: 'DOCKERHUB_USERNAME')]) {
-                    // Login to Docker Hub
+                sh 'docker tag frontend lewisroberts/frontend:latest'
+            }
+        }
+
+        stage('Push') {
+            steps {
+                withCredentials([usernamePassword(credentialsId: 'your-credentials-id', usernameVariable: 'DOCKERHUB_USERNAME', passwordVariable: 'DOCKERHUB_PASSWORD')]) {
                     sh 'docker login -u $DOCKERHUB_USERNAME -p $DOCKERHUB_PASSWORD'
-                    
-                    // Push the image to Docker Hub
-                    sh "docker push ${frontend}:${frontend}"
+                    sh 'docker push LewisRoberts/frontend:latest'
                 }
             }
         }
     }
 }
+
 
