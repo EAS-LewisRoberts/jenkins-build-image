@@ -1,52 +1,44 @@
 pipeline {
-    agent any
-    
-    stages { 
-       stage('Build Docker Image') {
-            steps {
-                // Builds the Docker image
-                script {
-                    docker.withRegistry('https://hub.docker.com/repositories/lewisroberts', 'fbd6ebb3-ae93-48c3-8116-88eeac06b1c7') {
-                        def imageName = 'LewisRoberts/frontend'
-                        def imageTag = 'latest'
-                        
-                        docker.build(imageName + ':' + imageTag, '.').push()
-                    }
-                }
-            }
-        }
+  agent any
 
-        stage('Login to Docker Hub') {
-            steps {
-                withCredentials([
-                    usernamePassword(credentialsId: 'fbd6ebb3-ae93-48c3-8116-88eeac06b1c7', usernameVariable: 'DOCKERHUB_USERNAME', passwordVariable: 'DOCKERHUB_PASSWORD')
-                ]) {
-                    script {
-                        def dockerHubRegistry = 'https://hub.docker.com/repositories/lewisroberts'
-                        def dockerImage = 'lewisroberts/frontend'
-                        def dockerTag = 'latest'
-                        
-                        docker.withRegistry(dockerHubRegistry, 'docker') {
-                            // Login to Docker Hub
-                            docker.login(username: DOCKERHUB_USERNAME, password: DOCKERHUB_PASSWORD)
-                            
-                            // Build and push the Docker image
-                            docker.image(dockerImage).tag("${lewisroberts}:${frontend}").push()
-                        }
-                    }
-                }
-            }
-        }
+  environment {
+    registryCredential = 'dockerhub'
+  }
 
-        stage('Push') {
-            steps {
-                withCredentials([usernamePassword(credentialsId: 'fbd6ebb3-ae93-48c3-8116-88eeac06b1c7', usernameVariable: 'DOCKERHUB_USERNAME', passwordVariable: 'DOCKERHUB_PASSWORD')]) {
-                    sh 'docker login -u $DOCKERHUB_USERNAME -p $DOCKERHUB_PASSWORD'
-                    sh 'docker push LewisRoberts/frontend:latest'
-                }
-            }
-        }
+  stages {
+    stage('gitclone') {
+      steps {
+        git 'https://github.com/EAS-LewisRoberts/jenkins-build-image.git'
+      }
     }
+
+    stage('Build') {
+      steps {
+        sh 'docker build -t LewisRoberts/frontend.'
+      }
+    }
+     
+    stage('Login') {
+      steps {
+        withCredentials([
+          usernamePassword(
+            credentialsId: 'dockerhub',
+            usernameVariable: 'DOCKER_USER',
+            passwordVariable: 'DOCKER_PASSWORD'
+          )
+        ]) {
+          sh "docker login -u $DOCKER_USER -p $DOCKER_PASSWORD"
+        }
+      }
+    }
+
+    stage('Push') {
+      steps {
+        sh 'docker push EAS-LewisRoberts/frontend'
+      }
+    }
+      
+  }
 }
 
 
