@@ -4,7 +4,7 @@ pipeline {
     stages {
         stage('Build') {
             steps {
-                sh 'docker build -t frontend .'
+                sh 'docker build -t lewisroberts/frontend .'
             }
         }
 
