@@ -2,7 +2,7 @@ pipeline {
     agent any
     
     stages {
-        stage('Build Image') {
+        stage('Build first Image') {
             steps {
                 script {
                     def imageName = 'lewisroberts/frontend'
@@ -13,7 +13,7 @@ pipeline {
                 }
             }
         }
-        stage('Build Image') {
+        stage('Build second Image') {
             steps {
                 script {
                     def imageName = 'lewisroberts/backend'
