@@ -23,15 +23,5 @@ pipeline {
                   }
               }
           }
-          stage('Login') {
-              steps {
-                  
-              }
-          }
-           stage('Push') {
-              steps {
-                  
-              }
-          }
       }
 }
