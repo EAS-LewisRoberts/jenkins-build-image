@@ -2,12 +2,6 @@ pipeline {
     agent any
 
       stages {
-          stage('Fetch Code') {
-              steps {
-                  git 'https://github.com/EAS-LewisRoberts/jenkins-build-image'
-              }
-          }
-
           stage('Build Frontend Image') {
               steps {
                   script {
