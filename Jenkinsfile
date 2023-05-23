@@ -2,21 +2,10 @@ pipeline {
     agent any
     
     stages {
-        stage('Build first Image') {
+        stage('Build Image') {
             steps {
                 script {
                     def imageName = 'lewisroberts/frontend'
-                    def imageTag = 'latest'
-                    
-                    // Build Docker image
-                    docker.build(imageName + ':' + imageTag)
-                }
-            }
-        }
-        stage('Build second Image') {
-            steps {
-                script {
-                    def imageName = 'lewisroberts/backend'
                     def imageTag = 'latest'
                     
                     // Build Docker image
