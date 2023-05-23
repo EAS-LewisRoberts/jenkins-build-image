@@ -4,15 +4,15 @@ pipeline {
     stages {
         stage('Fetch Code') {
             steps {
-                git 'https://github.com/your-username/your-repo.git'
+                git 'https://github.com/EAS-LewisRoberts/jenkins-build-image'
             }
         }
 
         stage('Build Frontend Image') {
             steps {
                 script {
-                    docker.withRegistry('https://registry.hub.docker.com', 'dockerhub-credentials') {
-                        def frontendImage = docker.build('your-username/frontend-image:${env.BUILD_NUMBER}', './frontend')
+                    docker.withRegistry('https://hub.docker.com/repositories/lewisroberts', 'dockerhub-credentials') {
+                        def frontendImage = docker.build('EAS-LewisRoberts/frontend-image:${env.BUILD_NUMBER}', './frontend')
                         frontendImage.push()
                     }
                 }
@@ -22,18 +22,12 @@ pipeline {
         stage('Build Backend Image') {
             steps {
                 script {
-                    docker.withRegistry('https://registry.hub.docker.com', 'dockerhub-credentials') {
-                        def backendImage = docker.build('your-username/backend-image:${env.BUILD_NUMBER}', './backend')
+                    docker.withRegistry('https://hub.docker.com/repositories/lewisroberts', 'dockerhub-credentials') {
+                        def backendImage = docker.build('EAS-LewisRoberts/backend-image:${env.BUILD_NUMBER}', './backend')
                         backendImage.push()
                     }
                 }
             }
-        }
-    }
-    
-    post {
-        always {
-            cleanWs()
         }
     }
 }
