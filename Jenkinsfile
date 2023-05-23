@@ -1,10 +1,25 @@
 pipeline {
     agent any
-
+    
     stages {
-        stage('Build') {
+        stage('Clone Repository') {
             steps {
-                sh 'docker build -t lewisroberts/frontend .'
+                // Clone the Git repository
+                git 'https://github.com/your-git-repo.git'
+            }
+        }
+        
+       stage('Build Docker Image') {
+            steps {
+                // Build the Docker image
+                script {
+                    docker.withRegistry('https://hub.docker.com/repositories/lewisroberts', 'fbd6ebb3-ae93-48c3-8116-88eeac06b1c7') {
+                        def imageName = 'LewisRoberts/frontend'
+                        def imageTag = 'latest'
+                        
+                        docker.build(imageName + ':' + imageTag, '.').push()
+                    }
+                }
             }
         }
 
