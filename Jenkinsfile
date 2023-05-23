@@ -13,7 +13,17 @@ pipeline {
                 }
             }
         }
-        
+        stage('Build Image') {
+            steps {
+                script {
+                    def imageName = 'lewisroberts/backend'
+                    def imageTag = 'latest'
+                    
+                    // Build Docker image
+                    docker.build(imageName + ':' + imageTag)
+                }
+            }
+        }
         stage('Push to Docker Hub') {
             steps {
                 withCredentials([usernamePassword(credentialsId: 'lewisroberts', passwordVariable: 'DOCKERHUB_PASSWORD', usernameVariable: 'DOCKERHUB_USERNAME')]) {
