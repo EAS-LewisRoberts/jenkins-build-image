@@ -25,14 +25,12 @@ pipeline {
           }
           stage('Login') {
               steps {
-                  script {
-                  }
+                  
               }
           }
            stage('Push') {
               steps {
-                  script {
-                  }
+                  
               }
           }
       }
