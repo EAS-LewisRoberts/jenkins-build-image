@@ -9,7 +9,7 @@ pipeline {
     stage('Build') {
       steps {
         git 'https://github.com/EAS-LewisRoberts/jenkins-build-image.git'
-        sh 'docker build -t LewisRoberts/frontend.'
+        sh 'docker build -t jenkins-build-image/frontend.'
       }
     }
      
@@ -29,7 +29,7 @@ pipeline {
 
     stage('Push') {
       steps {
-        sh 'docker push EAS-LewisRoberts/frontend'
+        sh 'docker push jenkins-build-image/frontend'
       }
     }
       
