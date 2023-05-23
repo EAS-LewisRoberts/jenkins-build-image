@@ -6,14 +6,9 @@ pipeline {
   }
 
   stages {
-    stage('gitclone') {
-      steps {
-        git 'https://github.com/EAS-LewisRoberts/jenkins-build-image.git'
-      }
-    }
-
     stage('Build') {
       steps {
+        git 'https://github.com/EAS-LewisRoberts/jenkins-build-image.git'
         sh 'docker build -t LewisRoberts/frontend.'
       }
     }
