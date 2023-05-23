@@ -4,14 +4,14 @@ pipeline {
     stages {
         stage('Clone Repository') {
             steps {
-                // Clone the Git repository
-                git 'https://github.com/your-git-repo.git'
+                // Clones the Git repository
+                git 'https://github.com/EAS-LewisRoberts/jenkins-build-image'
             }
         }
         
        stage('Build Docker Image') {
             steps {
-                // Build the Docker image
+                // Builds the Docker image
                 script {
                     docker.withRegistry('https://hub.docker.com/repositories/lewisroberts', 'fbd6ebb3-ae93-48c3-8116-88eeac06b1c7') {
                         def imageName = 'LewisRoberts/frontend'
