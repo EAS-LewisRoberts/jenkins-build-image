@@ -1,14 +1,7 @@
 pipeline {
     agent any
     
-    stages {
-        stage('Clone Repository') {
-            steps {
-                // Clones the Git repository
-                git 'https://github.com/EAS-LewisRoberts/jenkins-build-image'
-            }
-        }
-        
+    stages { 
        stage('Build Docker Image') {
             steps {
                 // Builds the Docker image
