@@ -9,7 +9,7 @@ pipeline {
   stages {
     stage('Build') {
       steps {
-        sh 'docker build -t jenkins-build-image/frontend.'
+        sh 'docker build -t jenkins-build-image/frontend .'
       }
     }
      //The second stage is named "Login". Within this stage, the Docker Hub credentials are obtained using the withCredentials block and the usernamePassword method. The credentials are identified by the credentialsId parameter, which is set to 'dockerhub'. The username and password are stored in the DOCKER_USER and DOCKER_PASSWORD variables, respectively. The sh step is then used to execute the docker login command, passing the values of the DOCKER_USER and DOCKER_PASSWORD variables as arguments.
