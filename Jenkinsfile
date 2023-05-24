@@ -9,6 +9,7 @@ pipeline {
   stages {
     stage('Build') {
       steps {
+        sh 'ls'
         sh 'docker build -t jenkins-build-image/frontend .'
       }
     }
