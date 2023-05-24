@@ -9,7 +9,6 @@ pipeline {
   stages {
     stage('Build') {
       steps {
-        git 'https://github.com/EAS-LewisRoberts/jenkins-build-image.git'
         sh 'docker build -t jenkins-build-image/frontend.'
       }
     }
